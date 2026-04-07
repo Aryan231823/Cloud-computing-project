@@ -1,7 +1,7 @@
 // --- CONFIG ---
 const SB_URL = 'https://your-project-id.supabase.co'; 
 const SB_KEY = 'your-anon-key-here'; 
-const GEMINI_API_KEY = 'AIzaSyBKUDhnVP68l_Wa251O2k5YQIxw_CzfQc4';
+const GEMINI_API_KEY = 'Your Gemini APi key';
 
 const supabase = window.supabase.createClient(SB_URL, SB_KEY);
 
