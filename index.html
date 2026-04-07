@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumina — Cloud Gallery</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="logo"><div class="logo-icon">◈</div> Lumina</div>
+    <span class="count-pill" id="countPill">0 images</span>
+  </header>
+
+  <main>
+    <div class="toolbar">
+      <button class="upload-btn" onclick="document.getElementById('fileInput').click()">↑ Upload to Cloud</button>
+      <input type="file" id="fileInput" accept="image/*" multiple style="display:none" />
+      <input class="search-box" type="text" id="searchInput" placeholder="Search cloud..." />
+      <div class="view-toggle">
+        <button id="gridBtn" class="active">⊞</button>
+        <button id="listBtn">☰</button>
+      </div>
+    </div>
+
+    <div class="drop-zone" id="dropZone">
+      <h3>Cloud Drop Zone</h3>
+      <p>Drag images here to sync to Supabase</p>
+    </div>
+
+    <div class="gallery-grid" id="gallery"></div>
+  </main>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box">
+      <img id="modalImg" src="" />
+      <div class="modal-footer">
+        <div class="modal-info">
+          <h4 id="modalName">—</h4>
+          <p id="modalMeta">—</p>
+        </div>
+        <div class="modal-btns">
+          <button class="btn btn-ai" id="aiBtn" onclick="analyzeImage()">✦ AI Describe</button>
+          <button class="btn btn-danger" onclick="deleteCurrent()">✕ Delete from Cloud</button>
+          <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+        </div>
+      </div>
+      <div class="ai-panel" id="aiPanel">
+        <div class="ai-label">✦ Lumina AI Insights</div>
+        <div class="ai-text" id="aiText"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

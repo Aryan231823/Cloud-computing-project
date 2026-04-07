@@ -1,0 +1,73 @@
+:root {
+  --ink: #1a1714; --ink2: #4a4742; --ink3: #8a8784;
+  --surface: #faf9f7; --surface2: #f2f0ec;
+  --border: rgba(26, 23, 20, 0.1);
+  --accent: #c8792a; --danger: #c0392b;
+  --radius: 12px; --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--surface); color: var(--ink); line-height: 1.5; overflow-x: hidden; }
+body.no-scroll { overflow: hidden; }
+
+header { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; border-bottom: 1px solid var(--border); background: white; position: sticky; top: 0; z-index: 10; }
+.logo { font-family: 'DM Serif Display', serif; font-size: 24px; display: flex; gap: 12px; align-items: center; }
+.logo-icon { width: 34px; height: 34px; background: var(--ink); border-radius: 8px; color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.count-pill { padding: 4px 14px; border-radius: 20px; background: var(--surface2); font-size: 12px; color: var(--ink2); border: 1px solid var(--border); font-weight: 500; }
+
+main { padding: 32px; max-width: 1200px; margin: 0 auto; }
+.toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: 30px; flex-wrap: wrap; }
+.upload-btn { padding: 12px 24px; border-radius: var(--radius); background: var(--ink); color: white; border: none; font-weight: 500; cursor: pointer; transition: 0.2s; }
+.upload-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.search-box { flex: 1; max-width: 300px; padding: 11px; border-radius: 10px; border: 1px solid var(--border); font-family: inherit; }
+.view-toggle { display: flex; border: 1px solid var(--border); border-radius: 10px; margin-left: auto; overflow: hidden; background: white; }
+.view-toggle button { padding: 10px 18px; border: none; background: transparent; cursor: pointer; color: var(--ink3); font-size: 18px; }
+.view-toggle button.active { background: var(--surface2); color: var(--ink); }
+
+.drop-zone { border: 2px dashed var(--border); border-radius: 20px; padding: 60px; text-align: center; margin-bottom: 30px; background: white; transition: 0.3s; cursor: pointer; }
+.drop-zone.dragging { border-color: var(--accent); background: #fffcf8; transform: scale(1.01); }
+.drop-zone h3 { font-family: 'DM Serif Display', serif; font-size: 22px; margin-bottom: 5px; }
+
+/* Grid Layout */
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+.card { background: white; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; position: relative; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.card-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; background: #eee; }
+.card-body { padding: 14px; }
+.card-name { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink); }
+.card-meta { font-size: 11px; color: var(--ink3); margin-top: 2px; }
+.card-actions { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; opacity: 0; transition: 0.2s; }
+.card:hover .card-actions { opacity: 1; }
+
+.card-check { position: absolute; top: 12px; left: 12px; width: 24px; height: 24px; border-radius: 8px; background: rgba(0,0,0,0.4); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: 0.2s; }
+.card-check.checked { background: var(--accent); border: 2px solid white; }
+
+/* List Layout */
+.gallery-list { display: flex; flex-direction: column; gap: 12px; }
+.list-card { display: flex; align-items: center; gap: 20px; background: white; padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; transition: 0.2s; }
+.list-card:hover { background: var(--surface2); }
+.list-thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; }
+
+/* Modal & UI */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10, 8, 6, 0.85); backdrop-filter: blur(12px); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+.modal-overlay.open { display: flex; }
+.modal-box { background: white; border-radius: 24px; width: 100%; max-width: 960px; overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+#modalImg { width: 100%; max-height: 60vh; object-fit: contain; background: #0b0a09; }
+.modal-footer { padding: 24px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 15px; }
+.ai-panel { display: none; padding: 20px 24px; background: #fffcf4; border-top: 1px solid #f8e8d0; }
+.ai-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--accent); letter-spacing: 1px; margin-bottom: 8px; }
+.ai-text { font-size: 15px; line-height: 1.6; color: var(--ink2); }
+
+.toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--ink); color: white; padding: 12px 28px; border-radius: 50px; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1000; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+.btn { padding: 10px 20px; border-radius: 10px; border: 1px solid var(--border); cursor: pointer; font-size: 14px; font-weight: 500; transition: 0.2s; }
+.btn-primary { background: var(--ink); color: white; }
+.btn-ai { background: var(--accent); color: white; border: none; }
+.btn-danger { background: #fee2e2; color: var(--danger); border: none; }
+.btn-danger:hover { background: var(--danger); color: white; }
+
+.icon-btn { width: 34px; height: 34px; border-radius: 10px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; transition: 0.2s; }
+.icon-btn.del { background: var(--danger); }
+.icon-btn.ai { background: var(--accent); }
+.icon-btn:hover { transform: scale(1.1); }
